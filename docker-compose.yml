@@ -1,0 +1,10 @@
+version: '1'
+volumes:
+    dbdata-graphql:
+services:
+    mongodb-server:
+        image: mongo:7.0.8-jammy
+        ports:
+            - '27017:27017'
+        volumes:
+            - dbdata-graphql:/data/mongodb
