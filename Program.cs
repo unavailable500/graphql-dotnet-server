@@ -1,3 +1,4 @@
+using graphql_dotnet_server.Controllers;
 using graphql_dotnet_server.Domain.Models.AppConfig;
 using graphql_dotnet_server.Repositories.Implementations;
 using graphql_dotnet_server.Repositories.Interfaces;
@@ -31,12 +32,14 @@ builder.Services.AddTransient<TodoService>();
 
 builder.Services
     .AddGraphQLServer()
+    .AddMutationConventions()
     .RegisterService<MongoTodoProjectDatabaseSettings>()
     .RegisterService<IMongoClient>()
     .RegisterService<IMongoDatabase>()
     .RegisterService<ITodoRepository>()
     .RegisterService<TodoService>()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 
 

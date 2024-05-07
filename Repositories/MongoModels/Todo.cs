@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace graphql_dotnet_server.Domain.Models.MongoModels
+namespace graphql_dotnet_server.Repositories.MongoModels
 {
-    public class Todos
+    public class Todo
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
