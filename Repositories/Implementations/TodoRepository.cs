@@ -5,6 +5,7 @@ using graphql_dotnet_server.Repositories.ModelExtensions;
 using graphql_dotnet_server.Repositories.MongoModels;
 using HotChocolate.Types.Relay;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using static MongoDB.Driver.WriteConcern;
 
@@ -62,6 +63,17 @@ namespace graphql_dotnet_server.Repositories.Implementations
             var filter = Builders<Todo>.Filter.Eq(todo => todo.Id, todoId);
             Todo? todo = (await getTodoList.FindAsync(filter)).FirstOrDefault();
             return todo;
+        }
+
+        public async Task<List<Todo>> GetSimilarTodos(TodoDTO todo)
+        {
+            var filterBuilder = Builders<Todo>.Filter;
+            var filter = filterBuilder.And(
+                filterBuilder.Regex(todo => todo.Title, new BsonRegularExpression(todo.Title, "i")),
+                filterBuilder.Ne(todo => todo.Id, todo.Id)
+            );
+            List<Todo> todos = await (await getTodoList.FindAsync(filter)).ToListAsync();
+            return todos;
         }
     }
 }

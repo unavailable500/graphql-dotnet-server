@@ -39,7 +39,8 @@ builder.Services
     .RegisterService<ITodoRepository>()
     .RegisterService<TodoService>()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddTypeExtension<TodoDTOExtension>();
 
 
 

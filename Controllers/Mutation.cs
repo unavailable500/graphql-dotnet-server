@@ -7,7 +7,7 @@ namespace graphql_dotnet_server.Controllers
 {
     public class Mutation
     {
-        public async Task<Todo> CreateTodo(TodoService todoService, TodoCreateDTO todoCreateDTO) => await todoService.CreateTodo(todoCreateDTO);
+        public async Task<TodoDTO> CreateTodo(TodoService todoService, TodoCreateDTO todoCreateDTO) => await todoService.CreateTodo(todoCreateDTO);
 
         [Error(typeof(TodoNotFoundException))]
         public async Task<TodoDTO> UpdateTodo(TodoService todoService, TodoDTO todo) =>  await todoService.UpdateTodo(todo);

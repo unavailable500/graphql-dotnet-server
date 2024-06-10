@@ -32,9 +32,9 @@ namespace graphql_dotnet_server.Services
             return todo.ToDto();
         }
 
-        public async Task<Todo> CreateTodo(TodoCreateDTO todoToCreate)
+        public async Task<TodoDTO> CreateTodo(TodoCreateDTO todoToCreate)
         {
-            return await _todoRepository.CreateTodo(todoToCreate);
+            return (await _todoRepository.CreateTodo(todoToCreate)).ToDto();
         }
 
         public async Task<TodoDTO> UpdateTodo(TodoDTO todoToCreate)
@@ -49,6 +49,11 @@ namespace graphql_dotnet_server.Services
             TodoDTO todo = await GetTodo(todoId);
             await _todoRepository.DeleteTodo(todoId);
             return todo;
+        }
+
+        public async Task<List<TodoDTO>> GetSimilarTodos(TodoDTO todo)
+        {
+            return (await _todoRepository.GetSimilarTodos(todo)).Select(t => t.ToDto()).ToList();
         }
 
 

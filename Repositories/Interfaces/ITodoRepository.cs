@@ -10,5 +10,6 @@ namespace graphql_dotnet_server.Repositories.Interfaces
         Task UpdateTodo(TodoDTO todoToUpdate);
         Task DeleteTodo(string todoId);
         Task<Todo?> GetTodo(string todoId);
+        Task<List<Todo>> GetSimilarTodos(TodoDTO todo);
     }
 }
