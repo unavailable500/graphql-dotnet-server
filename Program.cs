@@ -48,6 +48,6 @@ var app = builder.Build();
 
 app.MapGraphQL();
 
-app.MapGet("/", () => "Hello World!!!");
+app.MapGet("/", () => "The graphQL server is on /graphql !");
 
 app.Run();
